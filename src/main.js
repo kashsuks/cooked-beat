@@ -119,7 +119,7 @@ class BeatKitchenGame {
       const order = this.orderSystem.spawnOrder(currentBeat);
       if (order) {
         const stationIndex = this.orderSystem.getActiveOrders().length - 1;
-        this.kitchenScene.addDishIndicator(order.id, order.dish.color, stationIndex);
+        this.kitchenScene.addDishIndicator(order.id, order.dish.color, stationIndex, order.dishKey);
       }
     }
 
