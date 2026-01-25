@@ -6,7 +6,7 @@ export class ScoringSystem {
     }
 
     processHit(judgment, dishReward = 0) {
-        const basePoints = CONFIG.SCORING[judgment.toLowercase()] || 0;
+        const basePoints = CONFIG.SCORING[judgment.toLowerCase()] || 0;
 
         if (judgment === 'MISS') {
             this.gameState.resetCombo();

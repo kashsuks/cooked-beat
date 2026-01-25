@@ -12,6 +12,12 @@ export class HUD {
         overlay.className = 'ui-overlay';
         this.container.appendChild(overlay);
 
+        const beatDiv = document.createElement('div');
+        beatDiv.id = 'beat-indicator';
+        beatDiv.className = 'beat-indicator';
+        beatDiv.innerHTML = `<div class="beat-indicator-inner"></div>`;
+        overlay.appendChild(beatDiv);
+
         //display the score
         const scoreDiv = document.createElement('div');
         scoreDiv.className = 'hud-score';
@@ -46,7 +52,7 @@ export class HUD {
             combo: document.getElementById('combo'),
             failed: document.getElementById('failed'),
             timer: document.getElementById('timer'),
-            orders: document.getElementById('orders'),
+            orders: document.getElementById('orders-container'),
             feedback: document.getElementById('feedback'),
         };
     }
@@ -55,7 +61,7 @@ export class HUD {
         this.elements.score.textContent = `Score: ${score}`;
     }
 
-    updateComob(combo) {
+    updateCombo(combo) {
         this.elements.combo.textContent = `Combo: ${combo}x`;
         this.elements.combo.style.color = combo > 0 ? `#fbbf24` : '#666';
     }
@@ -110,5 +116,22 @@ export class HUD {
                 </div>
             `;
             }).join('');
+    }
+
+    updateBeat(beatProgress) {
+        const center = 0.5;
+        const dist = Math.abs(beatProgress - center);
+
+        //make it pulse stronger at the center
+        const strength = Math.max(0, 1 - (dist / 0.5));
+
+        const inner = this.container.querySelector('#beat-indicator .beat-indicator-inner');
+        if (!inner) {
+            return;
+        }
+
+        const scale = 0.85 + strength * 0.35;
+        inner.style.transform = `scale(${scale})`;
+        inner.style.opacity = `${0.25 + strength * 0.75}`;
     }
 }

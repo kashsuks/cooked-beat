@@ -52,6 +52,9 @@ class BeatKitchenGame {
     this.hud = new HUD(this.container);
     
     this.clock.start();
+    // enable the metronome audio
+    this.clock.initAudio();
+    this.clock.setMetronomeEnabled(true);
     this.setupInput();
     this.gameLoop();
   }
@@ -155,6 +158,8 @@ class BeatKitchenGame {
     this.hud.updateTimer(timeLeft);
     
     this.hud.updateOrders(this.orderSystem.getActiveOrders(), this.clock.getCurrentBeat());
+
+    this.hud.updateBeat(this.clock.getBeatProgress());
   }
 
   endGame() {

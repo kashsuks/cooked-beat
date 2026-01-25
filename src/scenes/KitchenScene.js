@@ -19,9 +19,9 @@ export class KitchenScene {
         this.camera.position.set(0, 6, 12);
         this.camera.lookAt(0, 0, 0);
 
-        this.renderer = new THREE.WebGLRenderer({ antialis: true })
+        this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(this.renderer.domElement);
+        Container.appendChild(this.renderer.domElement);
 
         this.createKitchen();
         this.createLights();
@@ -37,7 +37,7 @@ export class KitchenScene {
         //cooking position
         const positions = [-4.5, 0, 4.5];
         positions.forEach(x => {
-            const geo = new THREE.CylinderGeeometry(1, 1, 0.15, 32);
+            const geo = new THREE.CylinderGeometry(1, 1, 0.15, 32);
             const mat = new THREE.MeshStandardMaterial({ color: 0x263238 });
             const station = new THREE.Mesh(geo, mat);
             station.position.set(x, 1.4, 0);

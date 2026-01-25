@@ -39,7 +39,7 @@ export class OrderSystem {
 
     processAction(action, judgment, currentBeat) {
         for (let order of this.orders) {
-            if (orders.state !== 'active') {
+            if (order.state !== 'active') {
                 continue;
             }
 
@@ -50,7 +50,7 @@ export class OrderSystem {
             }
         }
 
-        return { sucess: false, reason: 'wrong_action' };
+        return { success: false, reason: 'wrong_action' };
     }
 
     handleCorrectAction(order, judgment) {
