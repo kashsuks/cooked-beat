@@ -14,9 +14,11 @@ export class KitchenScene {
         // load the textures for each dish
         const lettuceUrl = new URL('../lettuce.png', import.meta.url).href;
         const omeleteUrl = new URL('../omelete.png', import.meta.url).href;
+        const floorUrl = new URL('../floor.png', import.meta.url).href;
 
         this.textures.salad = this.textureLoader.load(lettuceUrl);
         this.textures.eggs = this.textureLoader.load(omeleteUrl);
+        this.textures.floor = this.textureLoader.load(floorUrl);
         // this.textures.burger = this.textureLoader.load('src/burger.png')
     }
 
@@ -41,6 +43,22 @@ export class KitchenScene {
     }
 
     createKitchen() {
+        // Floor with tiled texture
+        const floorTexture = this.textures.floor;
+        floorTexture.wrapS = THREE.RepeatWrapping;
+        floorTexture.wrapT = THREE.RepeatWrapping;
+        floorTexture.repeat.set(6, 6);
+        
+        const floorGeo = new THREE.PlaneGeometry(20, 20);
+        const floorMat = new THREE.MeshStandardMaterial({ 
+            map: floorTexture,
+            side: THREE.DoubleSide
+        });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = 0;
+        this.scene.add(floor);
+
         const counterGeo = new THREE.BoxGeometry(14, 0.6, 5);
         const counterMat = new THREE.MeshStandardMaterial({ color: 0x5d4037});
         const counter = new THREE.Mesh(counterGeo, counterMat);
