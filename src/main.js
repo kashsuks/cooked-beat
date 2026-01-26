@@ -13,6 +13,7 @@ class BeatKitchenGame {
     this.container = document.getElementById('game-container');
     this.gameState = new GameState();
     this.clock = new BeatClock(CONFIG.BPM);
+    console.log(this.clock)
     this.judge = new InputJudge();
     this.orderSystem = new OrderSystem();
     this.scoringSystem = new ScoringSystem(this.gameState);

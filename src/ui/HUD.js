@@ -12,11 +12,28 @@ export class HUD {
         overlay.className = 'ui-overlay';
         this.container.appendChild(overlay);
 
-        const beatDiv = document.createElement('div');
-        beatDiv.id = 'beat-indicator';
-        beatDiv.className = 'beat-indicator';
-        beatDiv.innerHTML = `<div class="beat-indicator-inner"></div>`;
-        overlay.appendChild(beatDiv);
+        const meterContainer = document.createElement('div');
+        meterContainer.id = 'beat-meter-container';
+        meterContainer.style.cssText = `
+            position: absolute;
+            bottom: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+        `;
+
+        const meterDiv = document.createElement('div');
+        meterDiv.id = 'beat-meter';
+        meterDiv.className = 'beat-meter';
+        meterDiv.innerHTML = `
+            <div class="timing-zone perfect></div>
+            <div class="timing-zone good good-left"></div>
+            <div class="timing-zone good good-right"></div>
+            <div id="beat-arrow" class="beat-arrow"></div>
+        `;
+
+        meterContainer.appendChild(meterDiv);
+        overlay.appendChild(meterContainer);
 
         //display the score
         const scoreDiv = document.createElement('div');
@@ -119,19 +136,25 @@ export class HUD {
     }
 
     updateBeat(beatProgress) {
-        const center = 0.5;
-        const dist = Math.abs(beatProgress - center);
-
-        //make it pulse stronger at the center
-        const strength = Math.max(0, 1 - (dist / 0.5));
-
-        const inner = this.container.querySelector('#beat-indicator .beat-indicator-inner');
-        if (!inner) {
+        const meter = this.container.querySelector('#beat-meter');
+        const arrow = this.container.querySelector('#beat-arrow');
+        
+        if (!meter || !arrow) {
             return;
         }
 
-        const scale = 0.85 + strength * 0.35;
-        inner.style.transform = `scale(${scale})`;
-        inner.style.opacity = `${0.25 + strength * 0.75}`;
+        const position = beatProgress * 100;
+        arrow.style.left = `${position}%`;
+
+        const center = 0.5;
+        const dist = Math.abs(beatProgress - center);
+
+        if (dist < 0.1) {
+            arrow.style.background = '#22c55e';
+        } else if (dist < 0.2) {
+            arrow.style.background = '#fbbf24';
+        } else {
+            arrow.style.background = '#ef4444';
+        }
     }
 }
