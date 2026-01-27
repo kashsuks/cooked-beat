@@ -29,17 +29,68 @@ class BeatKitchenGame {
   showMenu() {
     this.container.innerHTML = `
       <div class="menu-screen">
-        <h1 style="font-size: 4rem; margin: 0; color: #f59e0b;"> Cooked Beat </h1>
-        <p style="font-size: 1.2rem; margin: 20px 0;">Cook on the beat. Survive the rush.</p>
-        <div style="margin: 30px 0; font-size: 1rem; line-height: 1.8;">
-          <div><strong>A</strong> - Chop | <strong>S</strong> - Stir | <strong>D</strong> - Flip | <strong>SPACE</strong> - Serve</div>
-          <div style="margin-top: 10px; opacity: 0.7;">Hit keys on the beat. Complete orders before time runs out!</div>
+        <h1 class="menu-title">Cooked Beat</h1>
+
+        <div class="menu-copy">
+          <p class="menu-tagline">Cook on the beat. Survive the rush.</p>
+          <p class="menu-keys">A = Chop | S = Stir | D = Flip | SPACE = Serve</p>
+          <p class="menu-tip">Hit keys on the beat. Complete orders before time runs out!</p>
         </div>
-        <button class="btn-primary" id="start-btn">START SHIFT</button>
+
+        <div class="menu-options">
+          <div class="menu-option" id="start-btn">
+            <div class="option-bar"></div>
+            <span class="option-text">START SHIFT</span>
+          </div>
+
+          <div class="menu-option" id="settings-btn">
+            <div class="option-bar"></div>
+            <span class="option-text">SETTINGS</span>
+          </div>
+
+          <div class="menu-option" id="quit-btn">
+            <div class="option-bar"></div>
+            <span class="option-text">QUIT</span>
+          </div>
+        </div>
       </div>
     `;
     
     document.getElementById('start-btn').addEventListener('click', () => this.startGame());
+    document.getElementById('settings-btn').addEventListener('click', () => this.showSettings());
+    document.getElementById('quit-btn').addEventListener('click', () => this.quitGame());
+  }
+
+  showSettings() {
+    this.container.innerHTML = `
+      <div class="menu-screen">
+        <h1 class="menu-title">Settings</h1>
+        
+        <div class="settings-content">
+          <div style="font-size: 1.2rem; margin: 20px 0; color: #888;">
+            Settings coming soon...
+          </div>
+
+          <div class="menu-option" id="back-btn" style="margin-top: 40px;">
+            <div class="option-bar"></div>
+            <span class="option-text">BACK</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('back-btn').addEventListener('click', () => this.showMenu());
+  }
+
+  quitGame() {
+    this.container.innerHTML = `
+      <div class="menu-screen">
+        <h1 class="menu-title">Thanks for Playing!</h1>
+        <p style="font-size: 1.2rem; margin: 20px 0; color: #888;">
+          Refresh the page to play again.
+        </p>
+      </div>
+    `;
   }
 
   startGame() {
@@ -102,7 +153,7 @@ class BeatKitchenGame {
         this.kitchenScene.removeDishIndicator(result.order.id);
       } else {
         // update the current dish to show the next step
-        this.KitchenScene.updateDishSteps(result.order.id, result.order.steps, result.order.currentStep);
+        this.kitchenScene.updateDishSteps(result.order.id, result.order.steps, result.order.currentStep);
       }
       
       this.hud.showFeedback(judgment + '!', judgment);

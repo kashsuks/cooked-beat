@@ -1,0 +1,155 @@
+/* Menu Title Styling */
+.menu-title {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 5rem;
+  margin: 0;
+  color: #f59e0b;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+}
+
+.menu-copy {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-tagline {
+  font-size: 1.1rem;
+  color: #f3f4f6;
+}
+
+.menu-keys {
+  font-size: 0.95rem;
+  color: #d1d5db;
+}
+
+.menu-tip {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Menu Options Container */
+.menu-options {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+/* Individual Menu Option */
+.menu-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 8px 0 8px 90px;
+  transition: all 0.3s ease;
+}
+
+/* The bar that slides out */
+.option-bar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 60px;
+  height: 4px;
+  background: #f59e0b;
+  transform: translate(-40px, -50%);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+/* The text that appears */
+.option-text {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e5e7eb;
+  letter-spacing: 0.15em;
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0);
+}
+
+/* Hover effects */
+.menu-option:hover .option-bar {
+  transform: translate(0, -50%);
+  width: 80px;
+}
+
+.menu-option:hover .option-text {
+  transform: translateX(40px);
+  opacity: 1;
+  color: #f59e0b;
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+}
+
+/* Settings content styling */
+.settings-content {
+  position: absolute;
+  left: 10%;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+/* Make the back button in settings positioned relative to content */
+.settings-content .menu-option {
+  position: relative;
+}
+
+/* General menu screen styling */
+.menu-screen {
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Results screen styling */
+.results-screen {
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.btn-primary {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #f59e0b;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+}
+
+.btn-primary:hover {
+  background: #ff9800;
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.8);
+  transform: scale(1.05);
+}
