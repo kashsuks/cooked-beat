@@ -13,7 +13,7 @@ class BeatKitchenGame {
     this.container = document.getElementById('game-container');
     this.gameState = new GameState();
     this.clock = new BeatClock(CONFIG.BPM);
-    console.log(this.clock)
+    // console.log(this.clock)
     this.judge = new InputJudge();
     this.orderSystem = new OrderSystem();
     this.scoringSystem = new ScoringSystem(this.gameState);
@@ -100,6 +100,9 @@ class BeatKitchenGame {
       if (result.completed) {
         this.gameState.addCompletedOrder();
         this.kitchenScene.removeDishIndicator(result.order.id);
+      } else {
+        // update the current dish to show the next step
+        this.KitchenScene.updateDishSteps(result.order.id, result.order.steps, result.order.currentStep);
       }
       
       this.hud.showFeedback(judgment + '!', judgment);
@@ -121,6 +124,8 @@ class BeatKitchenGame {
       if (order) {
         const stationIndex = this.orderSystem.getActiveOrders().length - 1;
         this.kitchenScene.addDishIndicator(order.id, order.dish.color, stationIndex, order.dishKey);
+        // show the first step
+        this.kitchenScene.updateDishSteps(order.id, order.steps, order.currentStep);
       }
     }
 
